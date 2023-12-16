@@ -4,6 +4,15 @@ import datetime
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
+import mysql.connector
+import config
+mydb = mysql.connector.connect(
+  host=config.host,
+  user=config.user,
+  password=config.password
+)
+
+print(mydb)
 
 """
 After **inserting token** in the source code, run it:
