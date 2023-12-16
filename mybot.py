@@ -4,29 +4,7 @@ import datetime
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
-import mariadb
 import config
-import sys
-
-# Connect to MariaDB Platform
-try:
-    conn = mariadb.connect(
-        user=config.user,
-        password=config.password,
-        host=config.host,
-        port=3306,
-        database="exampledb"
-
-    )
-    
-except mariadb.Error as e:
-    print(f"Error connecting to MariaDB Platform: {e}")
-    sys.exit(1)
-
-# Get Cursor
-cur = conn.cursor()
-
-print(mydb)
 
 """
 After **inserting token** in the source code, run it:
