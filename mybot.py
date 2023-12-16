@@ -4,7 +4,7 @@ import datetime
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
-import config
+#import config
 
 """
 After **inserting token** in the source code, run it:
