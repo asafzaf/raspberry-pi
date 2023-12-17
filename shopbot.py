@@ -14,8 +14,8 @@ def handle(msg):
         start_command(chat_id)
     elif command == '/shoplist':
         f = open('shoplist.txt', 'r')
-        listobj = f.readlines()
-        bot.sendMessage(chat_id, listobj)
+        obj = f.read()
+        bot.sendMessage(chat_id, obj)
         f.close()
     elif command == '/buyall':
         f = open('shoplist.txt', 'w')
