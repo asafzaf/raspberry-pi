@@ -3,7 +3,7 @@ import os
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
-#import config
+import configShopBot
 
 def handle(msg):
     chat_id = msg['chat']['id']
@@ -31,7 +31,7 @@ def handle(msg):
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
 
-bot = telepot.Bot('6880455155:AAFjQrDZ3PCwkayPIEVi0kfK050pHOLe59U')
+bot = telepot.Bot(configShopBot.token)
 if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
