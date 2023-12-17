@@ -36,9 +36,9 @@ def handle(msg):
         f.write(f'\n{command}')
         f.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
-        log = open('shoplog.txt', 'a+')
-        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | added {command}\n')
-        log.close()
+        f = open('shoplog.txt', 'a+')
+        f.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | added {command}\n')
+        f.close()
 
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
