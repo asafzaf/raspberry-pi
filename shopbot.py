@@ -24,7 +24,7 @@ def handle(msg):
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
         f = open('shoplist.txt', 'a+')
-        f.write(command)
+        f.write(f'\t{command}')
         f.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
 
