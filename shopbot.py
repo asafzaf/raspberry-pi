@@ -18,6 +18,8 @@ def handle(msg):
         bot.sendMessage(chat_id, obj)
         f.close()
     elif command == '/buyall':
+        bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
+    elif command == 'קניתי הכל':
         f = open('shoplist.txt', 'w')
         f.write('רשימת קניות:')
         f.close()
