@@ -18,10 +18,12 @@ def handle(msg):
         bot.sendMessage(chat_id, listobj)
         f.close()
     elif command == '/buyall':
-        f = open('shoplist.txt', 'w').close()
+        f = open('shoplist.txt', 'w')
+        f.write('רשימת קניות:')
+        f.close()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
-        f = open('shoplist.txt', 'w+')
+        f = open('shoplist.txt', 'a+')
         f.write(command)
         f.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
