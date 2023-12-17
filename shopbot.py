@@ -19,7 +19,7 @@ def handle(msg):
         bot.sendMessage(chat_id, obj)
         f.close()
         log = open('shoplog.txt', 'a+')
-        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | ask for list \n')
+        log.write(f'chat id: {chat_id} | ask for list \n')
         log.close()
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
