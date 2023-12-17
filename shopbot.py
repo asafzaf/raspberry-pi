@@ -1,5 +1,6 @@
 import time
 import os
+import datetime
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
@@ -17,6 +18,9 @@ def handle(msg):
         obj = f.read()
         bot.sendMessage(chat_id, obj)
         f.close()
+        log = open('shoplog.txt', 'a+')
+        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | ask for list \n')
+        log.close()
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
@@ -24,11 +28,17 @@ def handle(msg):
         f.write('רשימת קניות:')
         f.close()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
+        log = open('shoplog.txt', 'a+')
+        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | deleted list \n')
+        log.close()
     else:
         f = open('shoplist.txt', 'a+')
         f.write(f'\n{command}')
         f.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
+        log = open('shoplog.txt', 'a+')
+        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | added {command}\n')
+        log.close()
 
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
