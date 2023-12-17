@@ -4,7 +4,7 @@ import datetime
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
-import configMybot
+import configMyBot
 
 """
 After **inserting token** in the source code, run it:
@@ -49,7 +49,7 @@ def send_question(chat_id):
     keyboard = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text=option)] for option in options], one_time_keyboard=True)
     bot.sendMessage(chat_id, 'Choose an option:', reply_markup=keyboard)
 
-bot = telepot.Bot(configMybot)
+bot = telepot.Bot(configMyBot.token)
 if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
