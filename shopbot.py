@@ -19,7 +19,7 @@ def handle(msg):
         bot.sendMessage(chat_id, obj)
         f.close()
         log = open('shoplog.txt', 'a+')
-        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | ask for list \n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | ask for list \n')
         log.close()
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
@@ -29,7 +29,7 @@ def handle(msg):
         f.close()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
         log = open('shoplog.txt', 'a+')
-        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | deleted list \n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | deleted list \n')
         log.close()
     else:
         f = open('shoplist.txt', 'a+')
@@ -37,7 +37,7 @@ def handle(msg):
         f.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
         log = open('shoplog.txt', 'a+')
-        log.write(f'{datetime.datetime.now()} | chat id: {chat_id} | added {command}\n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | added {command}\n')
         log.close()
 
 def start_command(chat_id):
