@@ -35,7 +35,7 @@ def handle(msg):
         f = open('shoplist.txt', 'a+')
         f.write(f'\n{command}')
         f.close()
-        log = open('/home/asafz/tasksshoplog.txt', 'w+')
+        log = open('/home/asafz/tasks/shoplog.txt', 'w+')
         log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | added {command}\n')
         log.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
