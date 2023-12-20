@@ -9,6 +9,7 @@ import configUriBot
 def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
+    sender = msg['from']['first_name']
     
     print('Got command: %s' % command)
     if command == '/start':
@@ -18,7 +19,7 @@ def handle(msg):
         obj = f.read()
         f.close()
         log = open('/home/asafz/tasks/urilog.txt', 'a+')
-        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | ask for list \n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | ask for list \n')
         log.close()
         bot.sendMessage(chat_id, obj)
     elif command == '/buyall':
@@ -28,15 +29,15 @@ def handle(msg):
         f.write('רשימת קניות:')
         f.close()
         log = open('/home/asafz/tasks/urilog.txt', 'a+')
-        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | deleted list \n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | deleted list \n')
         log.close()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
         f = open('urilist.txt', 'a+')
-        f.write(f'\n{command}')
+        f.write(f'\n{command} - {sender}')
         f.close()
         log = open('/home/asafz/tasks/urilog.txt', 'a+')
-        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} | added {command}\n')
+        log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | added {command}\n')
         log.close()
         bot.sendMessage(chat_id, f'נוסף: {command}')
 
