@@ -5,6 +5,8 @@ import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configMyBot
+import urllib.request
+
 
 """
 After **inserting token** in the source code, run it:
@@ -38,6 +40,11 @@ def handle(msg):
         bot.sendMessage(chat_id, array)
     elif command == '/question':
         send_question(chat_id)
+    elif command == '/ip':
+        external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+        bot.sendMessage(chat_id, 'Wait a second...')
+        time.sleep(1)
+        bot.sendMessage(chat_id, external_ip)
     else:
         bot.sendMessage(chat_id, 'What?..')
 
