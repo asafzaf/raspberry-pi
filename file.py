@@ -9,9 +9,9 @@ conn = psycopg2.connect(database=dbconf.name,
 
 cursor = conn.cursor()
 
-cursor.execute("INSERT INTO public.items_classes (class_name) values ('מוצרי חלב')")
+#cursor.execute("INSERT INTO public.items_classes (class_name) values ('מוצרי חלב')")
 
-conn.commit()
+#conn.commit()
 
 cursor.execute("SELECT * FROM public.items_classes ORDER BY id ASC")
 res = cursor.fetchall()
