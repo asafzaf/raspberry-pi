@@ -45,6 +45,7 @@ def handle(msg):
                 new_msg.join([f"{class_name}\n"])
         else:
             new_msg.join(["empty list..."])
+            print(new_msg)
         bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
