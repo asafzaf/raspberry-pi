@@ -35,6 +35,7 @@ def handle(msg):
         
         cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
+        print(new_msg)
         res = cursor.fetchall()
         print(res)
         print("\n")
@@ -45,7 +46,7 @@ def handle(msg):
                 new_msg.join([f"{class_name}\n"])
         else:
             new_msg.join(["empty list..."])
-            print(new_msg)
+            print("msg:" + new_msg)
         bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
