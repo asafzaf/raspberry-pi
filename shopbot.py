@@ -33,7 +33,7 @@ def handle(msg):
         # log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | ask for list \n')
         # log.close()
         
-        cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and isBought = False")
+        cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
         res = cursor.fetchall()
         if (len(res) != 0):
