@@ -43,9 +43,9 @@ def handle(msg):
         if (len(res) != 0):
             for line in res:
                 (id, class_name, num_of_objects, date) = line
-                new_msg.join([f"{class_name}\n"])
+                new_msg = new_msg.join(f"\n{class_name}")
         else:
-            new_msg.join(["empty list..."])
+            new_msg = new_msg.join("empty list...")
             print("msg:" + new_msg)
         bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
