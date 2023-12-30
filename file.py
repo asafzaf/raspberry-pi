@@ -18,7 +18,7 @@ cursor.execute("SELECT * FROM items ORDER BY id ASC")
 
 res = cursor.fetchall()
 
-print(res)
+print(len(res))
 #for line in res:
 #    (id, class_name, num_of_objects, date) = line
 #    print(f"{id} - {class_name}")
