@@ -6,15 +6,7 @@ from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
 import psycopg2
-import configparser
-config = configparser.ConfigParser()
-config.read('dbconfig.json')
-
-db_host = config.get('database', 'host')
-db_user = config.get('database', 'user')
-db_password = config.get('database', 'dbpass')
-db_name = config.get('database', 'name')
-db_port = config.get('database', 'port')
+import dbconf
 
 def handle(msg):
     chat_id = msg['chat']['id']
@@ -22,11 +14,11 @@ def handle(msg):
     sender = msg['from']['first_name']
     bot_id = '94'
     
-    conn = psycopg2.connect(database=db_name,
-                        host=db_host,
-                        user=db_user,
-                        password=db_password,
-                        port=db_port)
+    conn = psycopg2.connect(database=dbconf.name,
+                        host=dbconf.host,
+                        user=dbconf.user,
+                        password=dbconf.dbpass,
+                        port=dbconf.port)
 
     cursor = conn.cursor()
     
