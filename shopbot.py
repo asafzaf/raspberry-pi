@@ -45,7 +45,7 @@ def handle(msg):
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
         cursor.execute(f"UPDATE your_table_name SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = {bot_id};")        
-        
+        conn.commit()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
         cursor.execute(f"SELECT * FROM items WHERE name = '{command}'")
