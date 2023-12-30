@@ -26,7 +26,7 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     elif command == '/shoplist':
-        cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and is_bought = False")
+        cursor.execute(f"SELECT * FROM cart_items LEFT JOIN items on cart_items.item_id = items.id WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
         print(new_msg)
         res = cursor.fetchall()
@@ -35,8 +35,8 @@ def handle(msg):
         print(len(res))
         if (len(res) != 0):
             for line in res:
-                (id, class_name, num_of_objects, date) = line
-                new_msg = new_msg.join(f"\n{class_name}")
+                (id, item_id, amount, bot_id, chat_id, time_added, is_bought, time_bought, item_name) = line
+                new_msg = new_msg.join(f"\n{item_name}")
         else:
             new_msg = new_msg.join("empty list...")
             print("msg:" + new_msg)
