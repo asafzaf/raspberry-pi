@@ -34,13 +34,15 @@ def handle(msg):
         # log.close()
         
         cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and isBought = False")
-        msg = ''
+        new_msg = ''
         res = cursor.fetchall()
-        for line in res:
-            (id, class_name, num_of_objects, date) = line
-            msg.join(f"{class_name}\n")
-            
-        bot.sendMessage(chat_id, msg)
+        if (len(res) != 0):
+            for line in res:
+                (id, class_name, num_of_objects, date) = line
+                new_msg.join(f"{class_name}\n")
+        else:
+            new_msg.join('empty list...')
+        bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
