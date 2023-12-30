@@ -17,6 +17,7 @@ cursor.execute("SELECT * FROM public.items_classes ORDER BY id ASC")
 res = cursor.fetchall()
 
 for line in res:
-    print(f"{line['class_name']}")
+    (id, class_name, num_of_objects, date) = line
+    print(f"{id} - {class_name}")
 
 conn.close()
