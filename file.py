@@ -14,3 +14,5 @@ cursor.execute("INSERT INTO public.items_classes (class_name) values ('מוצר�
 cursor.execute("SELECT * FROM public.items_classes ORDER BY id ASC")
 
 print(cursor.fetchall())
+
+conn.close()
