@@ -37,7 +37,7 @@ def handle(msg):
             for line in res:
                 (id, item_name) = line
                 print(item_name)
-                new_msg = new_msg.join(f"\n {item_name}")
+                new_msg = new_msg.join(f"{item_name},")
             print("msg:" + new_msg)
 
         else:
