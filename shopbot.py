@@ -67,6 +67,7 @@ def handle(msg):
         
         if(len(res) == 0):
             cursor.execute(f"INSERT INTO items (name) values ('{command}')")  
+            conn.commit()
             cursor.execute(f"SELECT * FROM items WHERE name = '{command}'")
             res = cursor.fetchone()
 
