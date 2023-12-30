@@ -14,7 +14,9 @@ cursor.execute("INSERT INTO public.items_classes (class_name) values ('מוצר�
 conn.commit()
 
 cursor.execute("SELECT * FROM public.items_classes ORDER BY id ASC")
+res = cursor.fetchall()
 
-print(cursor.fetchall())
+for line in res:
+    print(f"{line['class_name']}")
 
 conn.close()
