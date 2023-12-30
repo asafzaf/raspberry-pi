@@ -28,6 +28,7 @@ def handle(msg):
     elif command == '/shoplist':
         cursor.execute(f"SELECT cart_items.id, items.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
+        list_items = []
         print(new_msg)
         res = cursor.fetchall()
         print(res)
@@ -37,9 +38,9 @@ def handle(msg):
             for line in res:
                 (id, item_name) = line
                 print(item_name)
-                new_msg = new_msg.join(f"{item_name},")
-            print("msg:" + new_msg)
-
+                list_items.append(item_name)
+            for item in list_items:
+                new_msg = new_msg + '\n' + item
         else:
             new_msg = new_msg.join("empty list...")
             print("msg:" + new_msg)
