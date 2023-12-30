@@ -26,13 +26,6 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     elif command == '/shoplist':
-        # f = open('shoplist.txt', 'r')
-        # obj = f.read()
-        # f.close()
-        # log = open('/home/asafz/tasks/shoplog.txt', 'a+')
-        # log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | ask for list \n')
-        # log.close()
-        
         cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
         print(new_msg)
@@ -51,25 +44,11 @@ def handle(msg):
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
-        # f = open('shoplist.txt', 'w')
-        # f.write('רשימת קניות:')
-        # f.close()
-        # log = open('/home/asafz/tasks/shoplog.txt', 'a+')
-        # log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | deleted list \n')
-        # log.close()
-        
+        cursor.execute(f"UPDATE your_table_name SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = {bot_id};")        
         
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
-        # f = open('shoplist.txt', 'a+')
-        # f.write(f'\n{command}')
-        # f.close()
-        # log = open('/home/asafz/tasks/shoplog.txt', 'a+')
-        # log.write(f'{str(datetime.datetime.now())} | chat id: {chat_id} - {sender} | added {command}\n')
-        # log.close()
-        
         cursor.execute(f"SELECT * FROM items WHERE name = '{command}'")
-        
         res = cursor.fetchone()
         
         if(res == None):
@@ -79,9 +58,7 @@ def handle(msg):
             res = cursor.fetchone()
 
         (id, name, class_id) = res
-        
-        cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")
-        
+        cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
         conn.commit()
         
         bot.sendMessage(chat_id, f'נוסף: {command}')
