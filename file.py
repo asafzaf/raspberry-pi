@@ -11,6 +11,8 @@ cursor = conn.cursor()
 
 cursor.execute("INSERT INTO public.items_classes (class_name) values ('מוצרי חלב')")
 
+conn.commit()
+
 cursor.execute("SELECT * FROM public.items_classes ORDER BY id ASC")
 
 print(cursor.fetchall())
