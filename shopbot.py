@@ -37,6 +37,8 @@ def handle(msg):
             for line in res:
                 (id, item_name) = line
                 new_msg = new_msg.join(f"\n{item_name}")
+            print("msg:" + new_msg)
+
         else:
             new_msg = new_msg.join("empty list...")
             print("msg:" + new_msg)
