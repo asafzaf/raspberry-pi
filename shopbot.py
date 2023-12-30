@@ -7,7 +7,7 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
 import psycopg2
 import sys
-sys.path.append('/home/asafz/tasks')
+sys.path.insert(0, '/home/asafz/tasks')
 import dbconf
 
 def handle(msg):
