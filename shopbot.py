@@ -37,12 +37,14 @@ def handle(msg):
         new_msg = ''
         res = cursor.fetchall()
         print(res)
+        print("\n")
+        print(len(res))
         if (len(res) != 0):
             for line in res:
                 (id, class_name, num_of_objects, date) = line
                 new_msg.join(f"{class_name}\n")
         else:
-            new_msg.join('empty list...')
+            new_msg.join("empty list...")
         bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
