@@ -6,7 +6,9 @@ from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
 import psycopg2
-import dbconf
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+from script_dir import dbconf
 
 def handle(msg):
     chat_id = msg['chat']['id']
