@@ -36,6 +36,7 @@ def handle(msg):
         cursor.execute(f"SELECT * FROM cart_items WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
         res = cursor.fetchall()
+        print(res)
         if (len(res) != 0):
             for line in res:
                 (id, class_name, num_of_objects, date) = line
