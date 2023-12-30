@@ -29,26 +29,20 @@ def handle(msg):
         cursor.execute(f"SELECT cart_items.id, items.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id WHERE bot_id = {bot_id} and is_bought = False")
         new_msg = ''
         list_items = []
-        print(new_msg)
         res = cursor.fetchall()
-        print(res)
-        print("\n")
-        print(len(res))
         if (len(res) != 0):
             for line in res:
                 (id, item_name) = line
-                print(item_name)
                 list_items.append(item_name)
             for item in list_items:
                 new_msg = new_msg + '\n' + item
         else:
             new_msg = new_msg.join("empty list...")
-            print("msg:" + new_msg)
         bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
-        cursor.execute(f"UPDATE your_table_name SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = {bot_id};")        
+        cursor.execute(f"UPDATE cart_items SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = {bot_id};")        
         conn.commit()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
