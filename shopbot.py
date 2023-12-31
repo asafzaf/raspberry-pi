@@ -1,6 +1,10 @@
 import time
 import os
 import datetime
+
+print("PATH:", os.environ.get("PATH"))
+print("PYTHONPATH:", os.environ.get("PYTHONPATH"))
+
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
