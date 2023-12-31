@@ -1,12 +1,4 @@
 import time
-import os
-import datetime
-import sys
-sys.path.append('/home/asafz/venv/lib/python3.11/site-packages')
-
-
-print("PATH:", os.environ.get("PATH"))
-print("PYTHONPATH:", os.environ.get("PYTHONPATH"))
 
 import telepot
 from telepot.loop import MessageLoop
