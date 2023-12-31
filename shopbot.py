@@ -4,6 +4,10 @@ import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
+
+import sys
+print(sys.path)
+
 import psycopg2
 
 import dbconf
