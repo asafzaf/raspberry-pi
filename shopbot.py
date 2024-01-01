@@ -7,7 +7,7 @@ import configShopBot
 
 import os
 
-with open('./output_file.txt', 'w') as f:
+with open('/home/asafz/tasks/output_file.txt', 'w') as f:
     for key, value in os.environ.items():
         f.write(f'{key}={value}\n')
 
