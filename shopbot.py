@@ -9,7 +9,8 @@ import sys
 import os
 
 with open('/home/asafz/tasks/output_file.txt', 'w') as f:
-    f.write(sys.path)
+    for path in sys.path:
+        f.write(f"{path}\n")
 
 
 import psycopg2
