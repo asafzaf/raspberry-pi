@@ -1,11 +1,11 @@
 import time
 import random
 import datetime
-import telepot
-from telepot.loop import MessageLoop
-from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
+# import telepot
+# from telepot.loop import MessageLoop
+# from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configMyBot
-import urllib.request
+# import urllib.request
 
 import sys
 print(sys.path)
