@@ -5,8 +5,11 @@ from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
 
-import sys
-print(sys.path)
+import os
+
+with open('/path/to/output_file.txt', 'w') as f:
+    for key, value in os.environ.items():
+        f.write(f'{key}={value}\n')
 
 import psycopg2
 
