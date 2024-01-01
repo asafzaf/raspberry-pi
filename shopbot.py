@@ -44,6 +44,7 @@ def handle(msg):
         list_items = []
         res = cursor.fetchall()
         if (len(res) != 0):
+            new_msg = 'רשימת קניות:'
             for line in res:
                 (id, item_name) = line
                 list_items.append(item_name)
