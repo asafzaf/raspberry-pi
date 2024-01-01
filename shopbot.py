@@ -39,7 +39,7 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     elif command == '/shoplist':
-        cursor.execute(f"SELECT cart_items.id, items.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id WHERE bot_id = {bot_id} and is_bought = False")
+        cursor.execute(f"SELECT cart_items.id, items.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id WHERE bot_id = '{bot_id}' and is_bought = False")
         new_msg = ''
         list_items = []
         res = cursor.fetchall()
@@ -55,7 +55,7 @@ def handle(msg):
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
-        cursor.execute(f"UPDATE cart_items SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = {bot_id};")        
+        cursor.execute(f"UPDATE cart_items SET is_bought = True, time_bought = CURRENT_TIMESTAMP WHERE bot_id = '{bot_id}';")        
         conn.commit()
         bot.sendMessage(chat_id, 'עבודה טובה, הרשימה נמחקה...')
     else:
