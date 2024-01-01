@@ -4,12 +4,13 @@ import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configShopBot
+import sys
 
 import os
 
 with open('/home/asafz/tasks/output_file.txt', 'w') as f:
-    for key, value in os.environ.items():
-        f.write(f'{key}={value}\n')
+    f.write(sys.path)
+
 
 import psycopg2
 
