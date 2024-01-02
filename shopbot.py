@@ -49,7 +49,7 @@ def handle(msg):
                 (id, item_name, department_name) = line
                 list_items.append({item_name, department_name})
             for item in list_items:
-                new_msg = new_msg + '\n' + item.item_name + f'({item.department_name})'
+                new_msg = new_msg + '\n' + item.item_name + f' ({item.department_name})'
         else:
             new_msg = new_msg.join("empty list...")
         bot.sendMessage(chat_id, new_msg)
