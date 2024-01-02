@@ -47,9 +47,9 @@ def handle(msg):
             new_msg = 'רשימת קניות:'
             for line in res:
                 (id, item_name, department_name) = line
-                list_items.append({item_name, department_name})
-            for item in list_items:
-                new_msg = new_msg + '\n' + item.item_name + f' ({item.department_name})'
+                #list_items.append({item_name, department_name})
+            #for item in list_items:
+                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
         else:
             new_msg = new_msg.join("empty list...")
         bot.sendMessage(chat_id, new_msg)
