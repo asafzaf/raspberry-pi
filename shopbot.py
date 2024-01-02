@@ -39,7 +39,7 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     elif command == '/shoplist':
-        cursor.execute(f"select * from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id where cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc")
+        cursor.execute(f"SELECT * FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
         new_msg = ''
         list_items = []
         res = cursor.fetchall()
