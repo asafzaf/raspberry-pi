@@ -39,17 +39,17 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     elif command == '/shoplist':
-        cursor.execute(f"SELECT cart_items.id, items.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
+        cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
         new_msg = ''
         list_items = []
         res = cursor.fetchall()
         if (len(res) != 0):
             new_msg = 'רשימת קניות:'
             for line in res:
-                (id, item_name) = line
-                list_items.append(item_name)
+                (id, item_name, department_name) = line
+                list_items.append({item_name, department_name})
             for item in list_items:
-                new_msg = new_msg + '\n' + item
+                new_msg = new_msg + '\n' + item.item_name + f'({item.department_name})'
         else:
             new_msg = new_msg.join("empty list...")
         bot.sendMessage(chat_id, new_msg)
