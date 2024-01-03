@@ -46,7 +46,7 @@ def handle(msg):
             new_msg = 'רשימת קניות:'
             for line in res:
                 (id, item_name, department_name) = line
-                new_msg = new_msg + '\n' + '*' + item_name + '*' + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("רשימת הקניות ריקה...")
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
@@ -58,7 +58,7 @@ def handle(msg):
             new_msg = 'היסטורית פריטים שהוספת:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + '*' + item_name + '*' + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
@@ -70,7 +70,7 @@ def handle(msg):
             new_msg = 'רשימת כל המוצרים שאני מכיר:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + '*' + item_name + '*' + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
@@ -92,7 +92,7 @@ def handle(msg):
         (id, name, class_id) = res
         cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
         conn.commit()
-        bot.sendMessage(chat_id, f'נוסף: {command}')
+        bot.sendMessage(chat_id, f'נוסף: *{command}*', parse_mode= 'Markdown')
     conn.close()
     
 def start_command(chat_id):
