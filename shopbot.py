@@ -63,7 +63,7 @@ def handle(msg):
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
         bot.sendMessage(chat_id, new_msg)
     elif command == '/allitems':
-        cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id order by departments.name asc;")
+        cursor.execute(f"select items.name, departments.name from items left join departments on items.department_id = departments.id order by departments.name asc;")
         new_msg = ''
         res = cursor.fetchall()
         if (len(res) != 0):
