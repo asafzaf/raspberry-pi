@@ -58,7 +58,7 @@ def handle(msg):
             new_msg = 'היסטורית פריטים שהוספת:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + '**' + item_name + '**' + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f' ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
@@ -70,7 +70,7 @@ def handle(msg):
             new_msg = 'רשימת כל המוצרים שאני מכיר:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + '**' + item_name + '**' + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f' ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
