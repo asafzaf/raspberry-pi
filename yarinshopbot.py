@@ -61,6 +61,7 @@ def handle(msg):
                 new_msg = new_msg + '\n' + item_name + f' ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
+        bot.sendMessage(chat_id, new_msg)
     elif command == '/allitems':
         cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id order by departments.name asc;")
         new_msg = ''
@@ -72,6 +73,7 @@ def handle(msg):
                 new_msg = new_msg + '\n' + item_name + f' ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
+        bot.sendMessage(chat_id, new_msg)
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
@@ -90,9 +92,7 @@ def handle(msg):
         (id, name, class_id) = res
         cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
         conn.commit()
-        
         bot.sendMessage(chat_id, f'נוסף: {command}')
-    
     conn.close()
     
 def start_command(chat_id):
