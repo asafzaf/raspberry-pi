@@ -41,18 +41,37 @@ def handle(msg):
     elif command == '/shoplist':
         cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
         new_msg = ''
-        list_items = []
         res = cursor.fetchall()
         if (len(res) != 0):
             new_msg = 'רשימת קניות:'
             for line in res:
                 (id, item_name, department_name) = line
-                #list_items.append({item_name, department_name})
-            #for item in list_items:
                 new_msg = new_msg + '\n' + item_name + f' ({department_name})'
         else:
-            new_msg = new_msg.join("empty list...")
+            new_msg = new_msg.join("רשימת הקניות ריקה...")
         bot.sendMessage(chat_id, new_msg)
+    elif command == '/myhistoryitems':
+        cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id where cart_items.bot_id = '{bot_id}' order by departments.name asc;")
+        new_msg = ''
+        res = cursor.fetchall()
+        if (len(res) != 0):
+            new_msg = 'היסטורית פריטים שהוספת:'
+            for line in res:
+                (item_name, department_name) = line
+                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
+        else:
+            new_msg = new_msg.join("מעולם לא הוספת פריטים...")
+    elif command == '/allitems':
+        cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id order by departments.name asc;")
+        new_msg = ''
+        res = cursor.fetchall()
+        if (len(res) != 0):
+            new_msg = 'רשימת כל המוצרים שאני מכיר:'
+            for line in res:
+                (item_name, department_name) = line
+                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
+        else:
+            new_msg = new_msg.join("מעולם לא הוספת פריטים...")
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
@@ -62,7 +81,6 @@ def handle(msg):
     else:
         cursor.execute(f"SELECT * FROM items WHERE name = '{command}'")
         res = cursor.fetchone()
-        
         if(res == None):
             cursor.execute(f"INSERT INTO items (name) values ('{command}')")  
             conn.commit()
