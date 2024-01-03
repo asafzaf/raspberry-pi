@@ -24,7 +24,6 @@ import dbconf
 def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
-    sender = msg['from']['first_name']
     bot_id = '32'
     
     conn = psycopg2.connect(database=dbconf.name,
@@ -46,10 +45,10 @@ def handle(msg):
             new_msg = 'רשימת קניות:'
             for line in res:
                 (id, item_name, department_name) = line
-                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("רשימת הקניות ריקה...")
-        bot.sendMessage(chat_id, new_msg)
+        bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
     elif command == '/myhistory':
         cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id where cart_items.bot_id = '{bot_id}' order by departments.name asc;")
         new_msg = ''
@@ -58,22 +57,22 @@ def handle(msg):
             new_msg = 'היסטורית פריטים שהוספת:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
-        bot.sendMessage(chat_id, new_msg)
+        bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
     elif command == '/allitems':
-        cursor.execute(f"select distinct items.name, departments.name from cart_items left join items on cart_items.item_id = items.id left join departments on items.department_id = departments.id order by departments.name asc;")
+        cursor.execute(f"select items.name, departments.name from items left join departments on items.department_id = departments.id order by departments.name asc;")
         new_msg = ''
         res = cursor.fetchall()
         if (len(res) != 0):
             new_msg = 'רשימת כל המוצרים שאני מכיר:'
             for line in res:
                 (item_name, department_name) = line
-                new_msg = new_msg + '\n' + item_name + f' ({department_name})'
+                new_msg = new_msg + '\n' + '*' + item_name + '*' + f'  - ({department_name})'
         else:
             new_msg = new_msg.join("מעולם לא הוספת פריטים...")
-        bot.sendMessage(chat_id, new_msg)
+        bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
     elif command == '/buyall':
         bot.sendMessage(chat_id, 'האם למחוק את הרשימה? (רשום - "קניתי הכל")')
     elif command == 'קניתי הכל':
@@ -92,7 +91,7 @@ def handle(msg):
         (id, name, class_id) = res
         cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
         conn.commit()
-        bot.sendMessage(chat_id, f'נוסף: {command}')
+        bot.sendMessage(chat_id, f'נוסף: *{command}*', parse_mode= 'Markdown')
     conn.close()
     
 def start_command(chat_id):
