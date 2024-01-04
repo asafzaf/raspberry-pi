@@ -38,6 +38,7 @@ def handle(msg):
             for line in res:
                 (id, item_name, department_name) = line
                 cursor.execute(f"UPDATE cart_items SET is_bought = True,  time_bought = CURRENT_TIMESTAMP WHERE cart_items.id = '{id}'")   
+                conn.commit()
                 new_msg = f'*{item_name}* - נקנה'
         elif (len(res) >= 2):
             new_msg = 'ישנם מספר פריטים דומים:'
