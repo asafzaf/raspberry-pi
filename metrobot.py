@@ -30,6 +30,7 @@ def handle(msg):
     elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
         #add to list
         x = 5
+        print("בחירת מזלללל")
     elif command == 'גדי':
         sign_num = 1
     elif command == 'דלי':
@@ -54,6 +55,9 @@ def handle(msg):
         sign_num = 11
     elif command == 'קשת':
         sign_num = 12
+    elif command == 'הסר':
+        x = 9
+        print("הסרהההה")
     else:
         title = '*אני לא יודע מה רשמת...*'
         text = 'אנא רשום מזל או רשום "אני מזל _____"'
@@ -62,7 +66,7 @@ def handle(msg):
         conn.commit()
         res = cursor.fetchone()
         (title, text) = res
-    bot.sendMessage(chat_id, f'{title}\n{text}')
+    bot.sendMessage(chat_id, f'{title}\n{text}', parse_mode= 'Markdown')
 
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'היי ברוך הבא להורוסקופ!\nאנא רשום מזל:')
