@@ -21,12 +21,12 @@ def attach(base, array):
         new_array.append(f'{base}{obj}')
     return new_array
 
-class scope():
-    def __init__(self,name,num,title,text):
-        self.name = name
-        self.num = num
-        self.title = title
-        self.text = text
+# class scope():
+#     def __init__(self,name,num,title,text):
+#         self.name = name
+#         self.num = num
+#         self.title = title
+#         self.text = text
 
 urls = []
 scopes = {}
@@ -98,7 +98,7 @@ for url in new_urls:
             scope_num = 12
         else:
             scope_name = 'תקלה'
-        scopes[f'{scope_name}'] = scope(scope_name, scope_num, temp_title[0].text, trimmed_string2 )
+        # scopes[f'{scope_name}'] = scope(scope_name, scope_num, temp_title[0].text, trimmed_string2 )
         cursor.execute(f"INSERT INTO metros (met, title, text) values ({scope_num}, '{temp_title[0].text}', '{trimmed_string2}')")  
         conn.commit()
     time.sleep(5)
