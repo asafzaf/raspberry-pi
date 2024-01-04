@@ -20,7 +20,7 @@ def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
 
-    print('Got command: %s' % command)
+    print('Got comma    nd: %s' % command)
     sign_num = 0
     title = ''
     text = ''
@@ -63,7 +63,6 @@ def handle(msg):
         text = 'אנא רשום מזל או רשום "אני מזל _____"'
     if sign_num != 0:
         cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
-        conn.commit()
         res = cursor.fetchone()
         (title, text) = res
     bot.sendMessage(chat_id, f'*{title}*\n{text}', parse_mode= 'Markdown')
