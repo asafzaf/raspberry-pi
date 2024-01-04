@@ -68,7 +68,7 @@ def handle(msg):
         (title, text) = res
         title = '*' + title + '*'
     mes = title + '\n' + text
-    bot.sendMessage(chat_id, mes, parse_mode= 'Markdown')
+    bot.sendMessage(chat_id, mes, parse_mode='Markdown')
 
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'היי ברוך הבא להורוסקופ!\nאנא רשום מזל:')
