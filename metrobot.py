@@ -59,6 +59,7 @@ def handle(msg):
         x = 9
         print("הסרהההה")
     else:
+        sign_num = 0
         title = 'אני לא יודע מה רשמת...'
         text = 'אנא רשום מזל או רשום "אני מזל _____"'
     if sign_num != 0:
