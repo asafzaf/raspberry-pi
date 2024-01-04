@@ -37,6 +37,25 @@ def handle(msg):
     print('Got command: %s' % command)
     if command == '/start':
         start_command(chat_id)
+    elif command.split(" ",1)[0] == 'קניתי':
+        item = command.split(" ",1)[1]
+        cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' and items.name LIKE '{item}%';")
+        res = cursor.fetchall()
+        new_msg = ''
+        if (len(res) == 1):
+            for line in res:
+                (id, item_name, department_name) = line
+                cursor.execute(f"UPDATE cart_items SET is_bought = True,  time_bought = CURRENT_TIMESTAMP WHERE cart_items.id = '{id}'")   
+                conn.commit()
+                new_msg = f'*{item_name}* - נקנה'
+        elif (len(res) >= 2):
+            new_msg = 'ישנם מספר פריטים דומים:'
+            for line in res:
+                (id, item_name, department_name) = line
+                new_msg = new_msg + '\n' + ' - *' + item_name + '*' + f'  - ({department_name})'
+        else:
+            new_msg = f"לא נמצא פריט בשם '{item}' ברשימה שלך"
+        bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
     elif command == '/shoplist':
         cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
         new_msg = ''
