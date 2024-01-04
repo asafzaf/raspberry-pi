@@ -66,7 +66,7 @@ def handle(msg):
         cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
         res = cursor.fetchone()
         (title, text) = res
-    bot.sendMessage(chat_id, "*" + title + "*\n" + text , parse_mode= 'Markdown')
+    bot.sendMessage(chat_id, "*" + title + "*\n" + text)
 
 def start_command(chat_id):
     bot.sendMessage(chat_id, 'היי ברוך הבא להורוסקופ!\nאנא רשום מזל:')
