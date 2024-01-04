@@ -46,7 +46,7 @@ def handle(msg):
                 (id, item_name, department_name) = line
                 new_msg = new_msg + '\n' + ' - *' + item_name + '*' + f'  - ({department_name})'
         else:
-            new_msg = f"לא נמצא פריט בשם '{item}'"
+            new_msg = f"לא נמצא פריט בשם '{item}' ברשימה שלך"
         bot.sendMessage(chat_id, new_msg, parse_mode= 'Markdown')
     elif command == '/shoplist':
         cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' order by departments.id asc;")
