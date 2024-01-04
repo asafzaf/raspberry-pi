@@ -28,6 +28,8 @@ def handle(msg):
         start_command(chat_id)
     elif command.split(" ",1)[0] == 'קניתי':
         item = command.split(" ",1)[1]
+        print(item)
+        print(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' and items.name LIKE '{item}%';")
         cursor.execute(f"SELECT cart_items.id, items.name, departments.name FROM cart_items LEFT JOIN items on cart_items.item_id = items.id LEFT JOIN departments on items.department_id = departments.id WHERE cart_items.is_bought is False and bot_id = '{bot_id}' and items.name LIKE '{item}%';")
         res = cursor.fetchall()
         new_msg = ''
