@@ -61,7 +61,7 @@ def handle(msg):
     else:
         sign_num = 0
         title = '*אני לא יודע מה רשמת...*'
-        text = 'אנא רשום מזל או רשום "אני מזל _____"'
+        text = 'אנא רשום מזל או רשום "אני מזל *שם המזל*"'
     if sign_num != 0:
         cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
         res = cursor.fetchone()
