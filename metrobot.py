@@ -28,8 +28,8 @@ def handle(msg):
         start_command(chat_id)
     else:
         if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
-            #add to list
-            x = 5
+            title = '*בקרוב!*'
+            text = 'אופציה להרשמה לקבלת הודעה יומית'
             print("בחירת מזלללל")
         elif command == 'גדי':
             sign_num = 1
@@ -56,8 +56,8 @@ def handle(msg):
         elif command == 'קשת':
             sign_num = 12
         elif command == 'הסר':
-            x = 9
-            print("הסרהההה")
+            title = '*בקרוב!*'
+            text = 'אופציה להסרה מהודעה יומית'
         else:
             sign_num = 0
             title = '*אני לא יודע מה רשמת...*'
