@@ -65,9 +65,12 @@ def handle(msg):
     if sign_num != 0:
         cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
         res = cursor.fetchone()
-        (title, text) = res
-        title = '*' + title + '*'
-    mes = title + '\n' + text
+        if (res):
+            (title, text) = res
+            title = '*' + title + '*'
+            mes = title + '\n' + text
+        else:
+            mes = "Error!"   
     bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     conn.close()
 
