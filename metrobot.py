@@ -8,15 +8,15 @@ import psycopg2
 
 import dbconf
 
-conn = psycopg2.connect(database=dbconf.name,
+def handle(msg):
+    
+    conn = psycopg2.connect(database=dbconf.name,
                         host=dbconf.host,
                         user=dbconf.user,
                         password=dbconf.dbpass,
                         port=dbconf.port)
 
-cursor = conn.cursor()
-
-def handle(msg):
+    cursor = conn.cursor()
     chat_id = msg['chat']['id']
     command = msg['text']
 
