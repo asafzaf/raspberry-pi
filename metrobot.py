@@ -25,7 +25,6 @@ def handle(msg):
     title = ''
     text = ''
     if command == '/start':
-        sign_num = 77
         start_command(chat_id)
     elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
         #add to list
@@ -68,9 +67,9 @@ def handle(msg):
         if (res):
             (title, text) = res
             title = '*' + title + '*'
-            mes = title + '\n' + text
         else:
             mes = "Error!"   
+    mes = title + '\n' + text
     bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     conn.close()
 
