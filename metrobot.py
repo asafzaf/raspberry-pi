@@ -26,51 +26,52 @@ def handle(msg):
     text = ''
     if command == '/start':
         start_command(chat_id)
-    elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
-        #add to list
-        x = 5
-        print("בחירת מזלללל")
-    elif command == 'גדי':
-        sign_num = 1
-    elif command == 'דלי':
-        sign_num = 2
-    elif command == 'דגים':
-        sign_num = 3
-    elif command == 'טלה':
-        sign_num = 4
-    elif command == 'שור':
-        sign_num = 5
-    elif command == 'תאומים':
-        sign_num = 6
-    elif command == 'סרטן':
-        sign_num = 7
-    elif command == 'אריה':
-        sign_num = 8
-    elif command == 'בתולה':
-        sign_num = 9
-    elif command == 'מאזניים':
-        sign_num = 10
-    elif command == 'עקרב':
-        sign_num = 11
-    elif command == 'קשת':
-        sign_num = 12
-    elif command == 'הסר':
-        x = 9
-        print("הסרהההה")
     else:
-        sign_num = 0
-        title = '*אני לא יודע מה רשמת...*'
-        text = 'אנא רשום מזל או רשום "אני מזל *_שם המזל_*"'
-    if (sign_num != 0):
-        cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
-        res = cursor.fetchone()
-        if (res):
-            (title, text) = res
-            title = '*' + title + '*'
+        if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
+            #add to list
+            x = 5
+            print("בחירת מזלללל")
+        elif command == 'גדי':
+            sign_num = 1
+        elif command == 'דלי':
+            sign_num = 2
+        elif command == 'דגים':
+            sign_num = 3
+        elif command == 'טלה':
+            sign_num = 4
+        elif command == 'שור':
+            sign_num = 5
+        elif command == 'תאומים':
+            sign_num = 6
+        elif command == 'סרטן':
+            sign_num = 7
+        elif command == 'אריה':
+            sign_num = 8
+        elif command == 'בתולה':
+            sign_num = 9
+        elif command == 'מאזניים':
+            sign_num = 10
+        elif command == 'עקרב':
+            sign_num = 11
+        elif command == 'קשת':
+            sign_num = 12
+        elif command == 'הסר':
+            x = 9
+            print("הסרהההה")
         else:
-            mes = "Error!"   
-    mes = title + '\n' + text
-    bot.sendMessage(chat_id, mes, parse_mode='Markdown')
+            sign_num = 0
+            title = '*אני לא יודע מה רשמת...*'
+            text = 'אנא רשום מזל או רשום "אני מזל *_שם המזל_*"'
+        if (sign_num != 0):
+            cursor.execute(f"SELECT metros.title, metros.text FROM metros WHERE metros.met = {sign_num} order by metros.id desc limit 1;")  
+            res = cursor.fetchone()
+            if (res):
+                (title, text) = res
+                title = '*' + title + '*'
+            else:
+                mes = "Error!"   
+        mes = title + '\n' + text
+        bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     conn.close()
 
 def start_command(chat_id):
