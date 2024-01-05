@@ -102,4 +102,5 @@ for url in new_urls:
         cursor.execute(f"INSERT INTO metros (met, title, text) values ({scope_num}, '{temp_title[0].text}', '{trimmed_string2}')")  
         conn.commit()
     time.sleep(5)
+conn.close()
     
