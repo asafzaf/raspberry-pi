@@ -101,7 +101,7 @@ def sign_translate(command):
         sign_num = 12
     else:
         sign_num = 0
-    print("sign num: " + sign_num)
+    print(f"sign num: {sign_num}")
     return sign_num
     
 def my_interval_job():
