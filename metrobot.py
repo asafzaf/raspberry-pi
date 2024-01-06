@@ -34,6 +34,7 @@ def handle(msg):
         if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
             sign_num = sign_translate(command.split(" ",2)[2])
             if (sign_num != 0):
+                print("rgister user")
                 cursor.execute(f"INSERT INTO met_users (telegram_name, chat_id, sign) VALUES ('{sender}', '{chat_id}', '{sign_num}')")
                 conn.commit()
                 cursor.execute(f"SELECT met_users.id, met_signs.name FROM met_users INNER JOIN met_signs ON met_users.sign = met_signs.id WHERE chat_id = '{chat_id}';")
@@ -65,7 +66,7 @@ def handle(msg):
                 title = '*אני לא יודע מה רשמת...*'
                 text = 'אנא רשום מזל או רשום "אני מזל *_שם המזל_*"' 
             mes = title + '\n' + text
-        bot.sendMessage(chat_id, mes, parse_mode='Markdown')
+            bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     conn.close()
 
 def start_command(chat_id):
@@ -98,6 +99,7 @@ def sign_translate(command):
         sign_num = 12
     else:
         sign_num = 0
+    print("sign num: " + sign_num)
     return sign_num
     
 def my_interval_job():
