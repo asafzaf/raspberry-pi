@@ -49,6 +49,8 @@ def handle(msg):
             # title = '*בקרוב!*'
             # text = 'אופציה להרשמה לקבלת הודעה יומית'
             print("בחירת מזלללל")
+            mes = title + '\n' + text
+            bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command == 'הסר':
             title = '*בקרוב!*'
             text = 'אופציה להסרה מהודעה יומית'
