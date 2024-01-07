@@ -49,7 +49,7 @@ def start_command(chat_id):
     f.close()
     if (obj.find(str(chat_id)) == -1):
         f = open('/home/asafz/dev/telegram/uriusers.txt', 'a+')
-        f.write(f'\n{chat_id}')
+        f.write(f'{chat_id}\n')
         f.close()
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
     
