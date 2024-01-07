@@ -14,6 +14,8 @@ def handle(msg):
     print('Got command: %s' % command)
     if command == '/start':
         start_command(chat_id)
+    elif command.split(" ",2)[0] == 'הודעה' and command.split(" ",2)[1] == 'מאורי:':
+        adminMessage(command.split(" ",2)[2])
     elif command == '/shoplist':
         f = open('urilist.txt', 'r')
         obj = f.read()
@@ -42,7 +44,20 @@ def handle(msg):
         bot.sendMessage(chat_id, f'נוסף: {command}')
 
 def start_command(chat_id):
+    f = open('/home/asafz/dev/telegram/uriusers.txt', 'r')
+    obj = f.read()
+    f.close()
+    if (obj.find(chat_id) == -1):
+        f = open('/home/asafz/dev/telegram/uriusers.txt', 'a+')
+        f.write(f'\n{chat_id}')
+        f.close()
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
+    
+def adminMessage(mesaage):
+    f = open('/home/asafz/dev/telegram/uriusers.txt', 'r')
+    users = f.read().splitlines()
+    for user in users:
+        bot.sendMessage(user, 'הודעה מאורי:\n' + mesaage)
 
 bot = telepot.Bot(configUriBot.token)
 if __name__ == "__main__":
