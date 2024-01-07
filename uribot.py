@@ -10,7 +10,7 @@ def handle(msg):
     chat_id = msg['chat']['id']
     command = msg['text']
     sender = msg['from']['first_name']
-    
+
     print('Got command: %s' % command)
     if command == '/start':
         start_command(chat_id)
@@ -52,7 +52,7 @@ def start_command(chat_id):
         f.write(f'{chat_id}\n')
         f.close()
     bot.sendMessage(chat_id, 'שלום! נא לרשום מוצרים לרשימת קניות..')
-    
+
 def adminMessage(mesaage):
     f = open('/home/asafz/dev/telegram/uriusers.txt', 'r')
     users = f.read().splitlines()
