@@ -47,7 +47,7 @@ def start_command(chat_id):
     f = open('/home/asafz/dev/telegram/uriusers.txt', 'r')
     obj = f.read()
     f.close()
-    if (obj.find(chat_id) == -1):
+    if (obj.find(str(chat_id)) == -1):
         f = open('/home/asafz/dev/telegram/uriusers.txt', 'a+')
         f.write(f'\n{chat_id}')
         f.close()
