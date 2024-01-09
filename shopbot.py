@@ -102,9 +102,14 @@ def handle(msg):
             res = cursor.fetchone()
 
         (id, name, class_id) = res
-        cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
-        conn.commit()
-        bot.sendMessage(chat_id, f'נוסף: *{command}*', parse_mode= 'Markdown')
+        cursor.execute(f"SELECT * FROM cart_items WHERE cart_items.item_id = {id} and bot_id = '{bot_id}' and is_bought = False;")
+        res = cursor.fetchone()
+        if(res == None):
+            cursor.execute(f"INSERT INTO cart_items (item_id, bot_id, chat_id) values ('{id}', '{bot_id}', '{chat_id}')")  
+            conn.commit()
+            bot.sendMessage(chat_id, f'נוסף: *{command}*', parse_mode= 'Markdown')
+        else:
+            bot.sendMessage(chat_id, f'המוצר קיים ברשימה: *{command}*', parse_mode= 'Markdown')
     conn.close()
     
 def start_command(chat_id):
