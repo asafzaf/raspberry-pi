@@ -156,8 +156,23 @@ def my_interval_job():
         mes = title + '\n' + text
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         
-    # send all weather to usesrs
     
+    cursor.execute("SELECT chat_id, city_id FROM weather_users WHERE met_users.is_active = True;")
+    users = cursor.fetchall()
+    
+    for user in users:
+        (chat_id, city_id) = user
+        cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+            # distract the result
+        res = cursor.fetchone()
+        if(res):
+            (city_name, date, min_temp, max_temp, avg_temp, max_wind_kph, will_it_rain, daily_chance_of_rain, sunrise, sunset, moonrise, moonset) = res
+            if(will_it_rain):
+                rain = 'ירד גשם'
+            else:
+                rain = 'לא ירד גשם'
+            mes = f'תחזית יומית!\nעיר: {city_name}\nתאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\nרוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\nשמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\nירח:\nזריחה: {moonrise}\nשקיעה: {moonset}'
+        bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     
     conn.close()
     
