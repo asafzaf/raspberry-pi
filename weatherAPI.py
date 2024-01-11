@@ -41,33 +41,7 @@ for city in cities:
     moonrise = forecast_data['astro']['moonrise']
     moonset = forecast_data['astro']['moonset']
 
-    res = cursor.execute(f"INSERT INTO weather (
-    city_id,
-    date,
-    max_temp,
-    min_temp,
-    avg_temp,
-    max_wind_kph,
-    will_it_rain,
-    daily_rain_chance,
-    sun_rise,
-    sun_set,
-    moon_rise,
-    moon_set
-    ) VALUES (
-    {id},
-    {date},
-    {max_temp},
-    {min_temp},
-    {avg_temp},
-    {max_wind_kph},
-    {will_it_rain},
-    {daily_chance_of_rain},
-    '{sunrise}',
-    '{sunset}',
-    '{moonrise}',
-    '{moonset}')
-    ;")
+    res = cursor.execute(f"INSERT INTO weather (city_id, date, max_temp, min_temp, avg_temp, max_wind_kph, will_it_rain, daily_rain_chance, sun_rise, sun_set, moon_rise, moon_set) VALUES ({id}, {date}, {max_temp}, {min_temp}, {avg_temp}, {max_wind_kph}, {will_it_rain}, {daily_chance_of_rain}, '{sunrise}', '{sunset}', '{moonrise}', '{moonset}');")
     conn.commit()
     print(f"INSERTED: {eng_name}, {date}")
 # print(f"Response:\ncity: {city_data}\n{date}\ntemp: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\nwind: {max_wind_kph}/kph\nRain? {will_it_rain} ({daily_chance_of_rain}%)\nSun:\nRise: {sunrise}\nSet: {sunset}\nMoon:\nRise: {moonrise}\nSet: {moonset}")
