@@ -54,7 +54,7 @@ def handle(msg):
                     rain = 'ירד גשם'
                 else:
                     rain = 'לא ירד גשם'
-                mes = f'תחזית יומית!\nעיר: {city_name}\nתאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\nרוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\nשמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\nירח:\nזריחה: {moonrise}\nשקיעה: {moonset}'
+                mes = f'תחזית יומית!🌍\nעיר: {city_name}\n⏰ תאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\n🌬 רוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\n☀ שמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\n🌕 ירח:\nזריחה: {moonrise}\nשקיעה: {moonset}\n יום מוצלח!'
             else:
                 mes = 'אני לא מכיר את העיר שרשמת.. אנא רשום שוב או פנה לאסף'
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
@@ -168,10 +168,10 @@ def my_interval_job():
         if(res):
             (city_name, date, min_temp, max_temp, avg_temp, max_wind_kph, will_it_rain, daily_chance_of_rain, sunrise, sunset, moonrise, moonset) = res
             if(will_it_rain):
-                rain = 'ירד גשם'
+                rain = '🌧ירד גשם🌧'
             else:
-                rain = 'לא ירד גשם'
-            mes = f'תחזית יומית!\nעיר: {city_name}\nתאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\nרוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\nשמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\nירח:\nזריחה: {moonrise}\nשקיעה: {moonset}'
+                rain = '🌤לא ירד גשם🌤'
+            mes = f'תחזית יומית!🌍\nעיר: {city_name}\n⏰ תאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\n🌬 רוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\n☀ שמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\n🌕 ירח:\nזריחה: {moonrise}\nשקיעה: {moonset}\n יום מוצלח!'
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     
     conn.close()
