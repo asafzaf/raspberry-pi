@@ -66,7 +66,7 @@ for city in cities:
     '{sunrise}',
     '{sunset}',
     '{moonrise}',
-    '{moonset}');
+    '{moonset}')
     ;")
     conn.commit()
     print(f"INSERTED: {eng_name}, {date}")
