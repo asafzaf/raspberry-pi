@@ -31,7 +31,21 @@ def handle(msg):
     if command == '/start':
         start_command(chat_id)
     else:
-        if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
+        if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'גר' and command.split(" ",2)[2][0] == 'ב':
+            city = command.split(" ", 2)[2][1:]
+            cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM cities_weather WHERE cities_weather.name_hebrew LIKE '%{city}%'")
+            res = cursor.fetchone()
+            if(res):
+                (city_id, name) = res
+                cursor.execute(f"INSERT INTO weather_users (telegram_name, chat_id, city_id) VALUES ('{sender}', '{chat_id}', '{city_id}');")
+                conn.commit()
+                mes = f'הרשמתך לתחזית לעיר {name} בוצעה בהצלחה!'
+            else:
+                mes = 'אני לא מכיר את העיר שרשמת.. אנא רשום שוב או פנה לאסף'
+        elif command.split(" ",1)[0] == 'תחזית':
+            
+            cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM weather INNER JOIN cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+        elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
             sign_num = sign_translate(command.split(" ",2)[2])
             if (sign_num != 0):
                 print("rgister user")
@@ -132,8 +146,6 @@ def my_interval_job():
     
 
 sched = BlockingScheduler()
-
-sched.add_job(my_interval_job, trigger="cron", hour=6)
 
 bot = telepot.Bot(configMetrosBot.token)
 if __name__ == "__main__":
