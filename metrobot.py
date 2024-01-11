@@ -45,8 +45,14 @@ def handle(msg):
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",1)[0] == 'תחזית':
             city = command.split(" ", 1)[1]
-            cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+            cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_chance_rain, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
             # distract the result
+            res = cursor.fetchone()
+            if(res):
+                (city_name, date, min_temp, max_temp, avg_temp, max_wind_kph, will_it_rain, daily_chance_of_rain, sunrise, sunset, moonrise, moonset) = res
+                mes = f'תחזית יומית!\nעיר: {city_name}\nתאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\nרוח: {max_wind_kph}/קמ"ש\nירד גשם? {will_it_rain} ({daily_chance_of_rain}%)\nשמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\nירח:\nזריחה: {moonrise}\nשקיעה: {moonset})'
+            else:
+                mes = 'אני לא מכיר את העיר שרשמת.. אנא רשום שוב או פנה לאסף'
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
             sign_num = sign_translate(command.split(" ",2)[2])
