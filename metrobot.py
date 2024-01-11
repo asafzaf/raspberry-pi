@@ -32,7 +32,7 @@ def handle(msg):
         start_command(chat_id)
     else:
         if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'גר' and command.split(" ",2)[2][0] == 'ב':
-            city = command.split(" ", 2)[2][1:]
+            city = command.split(" ", 2)[2].split("", 1)[1]
             cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM cities_weather WHERE cities_weather.name_hebrew LIKE '%{city}%'")
             res = cursor.fetchone()
             if(res):
@@ -42,9 +42,11 @@ def handle(msg):
                 mes = f'הרשמתך לתחזית לעיר {name} בוצעה בהצלחה!'
             else:
                 mes = 'אני לא מכיר את העיר שרשמת.. אנא רשום שוב או פנה לאסף'
+            bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",1)[0] == 'תחזית':
-            
             cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM weather INNER JOIN cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+            # distract the result
+            bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'מזל':
             sign_num = sign_translate(command.split(" ",2)[2])
             if (sign_num != 0):
@@ -142,6 +144,10 @@ def my_interval_job():
             mes = "Error!"   
         mes = title + '\n' + text
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
+        
+    # send all weather to usesrs
+    
+    
     conn.close()
     
 
