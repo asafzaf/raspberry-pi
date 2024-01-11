@@ -44,6 +44,7 @@ def handle(msg):
                 mes = 'אני לא מכיר את העיר שרשמת.. אנא רשום שוב או פנה לאסף'
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",1)[0] == 'תחזית':
+            city = command.split(" ", 1)[1]
             cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM weather INNER JOIN cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
             # distract the result
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
