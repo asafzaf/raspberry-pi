@@ -162,7 +162,7 @@ def my_interval_job():
     
     for user in users:
         (chat_id, city_id) = user
-        cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+        cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.id = '{city_id}' ORDER BY weather.date asc LIMIT 1;")
             # distract the result
         res = cursor.fetchone()
         if(res):
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
     
-    sched.add_job(my_interval_job, trigger="cron", hour=8)
+    sched.add_job(my_interval_job, trigger="cron", hour=10)
     sched.start()
     print('Schedule is ready ...')
 
