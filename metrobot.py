@@ -45,7 +45,7 @@ def handle(msg):
             bot.sendMessage(chat_id, mes, parse_mode='Markdown')
         elif command.split(" ",1)[0] == 'תחזית':
             city = command.split(" ", 1)[1]
-            cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date asc LIMIT 1;")
+            cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.name_hebrew LIKE '%{city}%' ORDER BY weather.date desc LIMIT 1;")
             # distract the result
             res = cursor.fetchone()
             if(res):
@@ -169,7 +169,7 @@ def my_interval_job_weather():
     
     for user in users:
         (chat_id, city_id) = user
-        cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.id = '{city_id}' ORDER BY weather.date asc LIMIT 1;")
+        cursor.execute(f"SELECT cities_weather.name_hebrew, weather.date, weather.min_temp, weather.max_temp, weather.avg_temp, weather.max_wind_kph, weather.will_it_rain, weather.daily_rain_chance, weather.sun_rise, weather.sun_set, weather.moon_rise, weather.moon_set FROM weather INNER JOIN cities_weather ON cities_weather.id = weather.city_id WHERE cities_weather.id = '{city_id}' ORDER BY weather.date desc LIMIT 1;")
             # distract the result
         res = cursor.fetchone()
         if(res):
