@@ -178,13 +178,15 @@ def my_interval_job():
     
 
 sched = BlockingScheduler()
+sched.add_job(my_interval_job, trigger="cron", hour=10)
+
 
 bot = telepot.Bot(configMetrosBot.token)
 if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
     
-    sched.add_job(my_interval_job, trigger="cron", hour=10)
+    # sched.add_job(my_interval_job, trigger="cron", hour=10)
     sched.start()
     print('Schedule is ready ...')
 
