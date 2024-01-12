@@ -172,21 +172,21 @@ def my_interval_job():
             else:
                 rain = '🌤לא ירד גשם🌤'
             mes = f'תחזית יומית!🌍\nעיר: {city_name}\n⏰ תאריך: {date}\nטמפרטורה: {min_temp}°c - {max_temp}°c ({avg_temp}°c)\n🌬 רוח: {max_wind_kph}/קמ"ש\nירד גשם? {rain} ({daily_chance_of_rain}%)\n☀ שמש:\nזריחה: {sunrise}\nשקיעה: {sunset}\n🌕 ירח:\nזריחה: {moonrise}\nשקיעה: {moonset}\n יום מוצלח!'
+        else:
+            mes = "Error!"
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     
     conn.close()
     
 
 sched = BlockingScheduler()
-sched.add_job(my_interval_job, trigger="cron", hour=10)
-
 
 bot = telepot.Bot(configMetrosBot.token)
 if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
     
-    # sched.add_job(my_interval_job, trigger="cron", hour=10)
+    sched.add_job(my_interval_job, trigger="cron", hour=10)
     sched.start()
     print('Schedule is ready ...')
 
