@@ -131,15 +131,14 @@ def sign_translate(command):
     print(f"sign num: {sign_num}")
     return sign_num
     
-def my_interval_job():
+def my_interval_job_metros():
     conn = psycopg2.connect(database=dbconf.name,
                         host=dbconf.host,
                         user=dbconf.user,
                         password=dbconf.dbpass,
                         port=dbconf.port)
 
-    cursor = conn.cursor()
-    
+    cursor = conn.cursor() 
     cursor.execute("SELECT met_users.chat_id, met_users.sign FROM met_users WHERE met_users.is_active = True;")
     users = cursor.fetchall()
     
@@ -155,8 +154,16 @@ def my_interval_job():
             mes = "Error!"   
         mes = title + '\n' + text
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
-        
+    conn.close()
     
+def my_interval_job_weather():
+    conn = psycopg2.connect(database=dbconf.name,
+                        host=dbconf.host,
+                        user=dbconf.user,
+                        password=dbconf.dbpass,
+                        port=dbconf.port)
+
+    cursor = conn.cursor()
     cursor.execute("SELECT chat_id, city_id FROM weather_users WHERE met_users.is_active = True;")
     users = cursor.fetchall()
     
@@ -175,9 +182,7 @@ def my_interval_job():
         else:
             mes = "Error!"
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
-    
     conn.close()
-    
 
 sched = BlockingScheduler()
 
@@ -186,7 +191,8 @@ if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
     
-    sched.add_job(my_interval_job, trigger="cron", hour=10)
+    sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
+    sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
     sched.start()
     print('Schedule is ready ...')
 
