@@ -1,8 +1,11 @@
 import time
 import telepot
 from telepot.loop import MessageLoop
+from apscheduler.schedulers.blocking import BlockingScheduler
+import time
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 import configMetrosBot
+import threading
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -184,18 +187,19 @@ def my_interval_job_weather():
         bot.sendMessage(chat_id, mes, parse_mode='Markdown')
     conn.close()
 
-sched = BlockingScheduler()
-sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
-sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
 
 bot = telepot.Bot(configMetrosBot.token)
 if __name__ == "__main__":
     MessageLoop(bot, handle).run_as_thread()
     print('I am listening ...')
     
+    sched = BlockingScheduler()
+    sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
+    sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
     # sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
     # sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
-    sched.start()
+    sched_thread = threading.Thread(target=sched.start)
+    sched_thread.start()
     print('Schedule is ready ...')
 
 while 1:
