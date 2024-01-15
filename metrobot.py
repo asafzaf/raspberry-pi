@@ -167,7 +167,7 @@ def my_interval_job_weather():
                         port=dbconf.port)
 
     cursor = conn.cursor()
-    cursor.execute("SELECT chat_id, city_id FROM weather_users WHERE met_users.is_active = True;")
+    cursor.execute("SELECT chat_id, city_id FROM weather_users WHERE weather_users.is_active = True;")
     users = cursor.fetchall()
     
     for user in users:
