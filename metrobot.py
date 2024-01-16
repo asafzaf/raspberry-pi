@@ -35,7 +35,7 @@ def handle(msg):
         start_command(chat_id)
     else:
         if command.split(" ",2)[0] == 'אני' and command.split(" ",2)[1] == 'גר' and command.split(" ",2)[2][0] == 'ב':
-            city = command.split(" ", 2)[2].split("", 1)[1]
+            city = command.split(" ", 2)[2][1:]
             cursor.execute(f"SELECT cities_weather.id, cities_weather.hebrew FROM cities_weather WHERE cities_weather.name_hebrew LIKE '%{city}%'")
             res = cursor.fetchone()
             if(res):
