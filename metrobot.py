@@ -193,7 +193,7 @@ if __name__ == "__main__":
     
     sched = BlockingScheduler()
     sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
-    sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
+    sched.add_job(my_interval_job_weather, trigger="cron", hour=7)
     # sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
     # sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
     sched_thread = threading.Thread(target=sched.start)
