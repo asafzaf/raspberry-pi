@@ -191,13 +191,16 @@ def my_interval_job_weather():
 bot = telepot.Bot(configMetrosBot.token)
 if __name__ == "__main__":
     
-    sched = BlockingScheduler()
-    sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
-    sched.add_job(my_interval_job_weather, trigger="cron", hour=7)
+    sched1 = BlockingScheduler()
+    sched2 = BlockingScheduler()
+    sched1.add_job(my_interval_job_metros, trigger="cron", hour=8)
+    sched2.add_job(my_interval_job_weather, trigger="cron", hour=7, min=30)
     # sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
     # sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
-    sched_thread = threading.Thread(target=sched.start)
-    sched_thread.start()
+    sched_thread1 = threading.Thread(target=sched1.start)
+    sched_thread2 = threading.Thread(target=sched2.start)
+    sched_thread1.start()
+    sched_thread2.start()
     print('Schedule is ready ...')
     
     
