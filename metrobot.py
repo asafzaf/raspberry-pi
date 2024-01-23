@@ -193,10 +193,8 @@ if __name__ == "__main__":
     
     sched1 = BlockingScheduler()
     sched2 = BlockingScheduler()
-    sched1.add_job(my_interval_job_metros, trigger="cron", hour=8, jitter=5)
-    sched2.add_job(my_interval_job_weather, trigger="cron", hour=7, minute=30)
-    # sched.add_job(my_interval_job_metros, trigger="cron", hour=8)
-    # sched.add_job(my_interval_job_weather, trigger="cron", hour=8)
+    sched1.add_job(my_interval_job_metros, trigger="cron", hour=8)
+    sched2.add_job(my_interval_job_weather, trigger="cron", hour=7)
     sched_thread1 = threading.Thread(target=sched1.start)
     sched_thread2 = threading.Thread(target=sched2.start)
     sched_thread1.start()
